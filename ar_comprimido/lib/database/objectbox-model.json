@@ -1,0 +1,72 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "1:185278035458131309",
+      "lastPropertyId": "9:7649702276766651938",
+      "name": "Dados",
+      "properties": [
+        {
+          "id": "1:7693103748690401295",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:6047575188043807563",
+          "name": "local",
+          "type": 9
+        },
+        {
+          "id": "3:1755218858127515255",
+          "name": "componente",
+          "type": 9
+        },
+        {
+          "id": "4:1828078371572098529",
+          "name": "obs",
+          "type": 9
+        },
+        {
+          "id": "5:3219764348904189482",
+          "name": "classificacao",
+          "type": 9
+        },
+        {
+          "id": "6:3717991742090465466",
+          "name": "data",
+          "type": 9
+        },
+        {
+          "id": "7:769684790879052303",
+          "name": "qtd",
+          "type": 9
+        },
+        {
+          "id": "8:717982977329124693",
+          "name": "fotoPath",
+          "type": 9
+        },
+        {
+          "id": "9:7649702276766651938",
+          "name": "tag",
+          "type": 6
+        }
+      ],
+      "relations": []
+    }
+  ],
+  "lastEntityId": "1:185278035458131309",
+  "lastIndexId": "0:0",
+  "lastRelationId": "0:0",
+  "lastSequenceId": "0:0",
+  "modelVersion": 5,
+  "modelVersionParserMinimum": 5,
+  "retiredEntityUids": [],
+  "retiredIndexUids": [],
+  "retiredPropertyUids": [],
+  "retiredRelationUids": [],
+  "version": 1
+}
