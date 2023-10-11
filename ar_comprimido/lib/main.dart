@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:ar_comprimido/adicionar.dart';
 import 'package:ar_comprimido/configs.dart';
 import 'package:ar_comprimido/database/objectbox.g.dart';
@@ -83,7 +85,67 @@ class MyHomePage extends StatelessWidget {
                           color: Colors.white, size: 40))
                     ]))),
         body: const Column(children: [
-          Padding(padding: EdgeInsets.all(10), child: Text('Hola'))
+          Padding(padding: EdgeInsets.all(10), child: ListaRegistros())
         ]));
+  }
+}
+
+class ListaRegistros extends StatefulWidget {
+  const ListaRegistros({
+    super.key,
+  });
+
+  @override
+  State<ListaRegistros> createState() => _ListaRegistrosState();
+}
+
+class _ListaRegistrosState extends State<ListaRegistros> {
+  List<Dados> atualizarRegistros(int tag) {
+    Query<Dados> query = dadosBox.query(Dados_.tag.equals(tag)).build();
+    return query.find();
+  }
+
+  int size = dadosBox.getAll().length;
+  _setState() {
+    size = dadosBox.getAll().length;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+        flex: 8,
+        child: SizedBox(
+          child: ListView.separated(
+            shrinkWrap: true,
+            itemBuilder: (BuildContext context, int index) {
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                      width: 120,
+                      height: 120,
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                              fit: BoxFit.fill,
+                              image: FileImage(File(
+                                  atualizarRegistros(index)[0].fotoPath))))),
+                  Column(
+                    children: [
+                      Text(atualizarRegistros(index)[0].local),
+                      Text(atualizarRegistros(index)[0].tag.toString())
+                    ],
+                  ),
+                  FloatingActionButton(onPressed: () {
+                    print('fodasi');
+                  })
+                ],
+              );
+            },
+            separatorBuilder: (BuildContext context, int index) {
+              return const Divider();
+            },
+            itemCount: size,
+          ),
+        ));
   }
 }
