@@ -44,6 +44,7 @@ class _ConfigsScreenState extends State<ConfigsScreen> {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 300),
                     child: FloatingActionButton.extended(
+                        heroTag: 'send',
                         onPressed: () {
                           Future<void> showMyDialog() async {
                             return showDialog<void>(
@@ -57,7 +58,7 @@ class _ConfigsScreenState extends State<ConfigsScreen> {
 
                           showMyDialog();
                         },
-                        backgroundColor: const Color.fromRGBO(0, 108, 181, 1),
+                        backgroundColor: cor_senai,
                         label: const Text(
                           'Enviar dados',
                           style: TextStyle(
@@ -67,6 +68,7 @@ class _ConfigsScreenState extends State<ConfigsScreen> {
                         )),
                   ),
                   FloatingActionButton.extended(
+                      heroTag: 'delete',
                       onPressed: () {
                         Future<void> showMyDialog() async {
                           return showDialog<void>(

@@ -3,11 +3,18 @@ import 'dart:io';
 import 'package:ar_comprimido/adicionar.dart';
 import 'package:ar_comprimido/configs.dart';
 import 'package:ar_comprimido/database/objectbox.g.dart';
+import 'package:ar_comprimido/edit.dart';
 import 'package:flutter/material.dart';
 import './database/objectbox_databse.dart';
 import './dados.dart';
 
 final dadosBox = objectbox.store.box<Dados>();
+// ignore: constant_identifier_names
+const cor_senai = Color.fromRGBO(0, 108, 181, 1);
+
+TextStyle titleFont({Color cor = cor_senai, double size = 20}) {
+  return TextStyle(fontSize: size, fontWeight: FontWeight.bold, color: cor);
+}
 
 late ObjectBox objectbox;
 Future<void> main() async {
@@ -26,8 +33,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-            seedColor: const Color.fromRGBO(1, 78, 129, 1)),
+        colorScheme: ColorScheme.fromSeed(seedColor: cor_senai),
         useMaterial3: true,
       ),
       home: const MyHomePage(title: ''),
@@ -101,51 +107,74 @@ class ListaRegistros extends StatefulWidget {
 
 class _ListaRegistrosState extends State<ListaRegistros> {
   List<Dados> atualizarRegistros(int tag) {
-    Query<Dados> query = dadosBox.query(Dados_.tag.equals(tag)).build();
+    Query<Dados> query = dadosBox.query(Dados_.tag.greaterOrEqual(tag)).build();
     return query.find();
   }
 
   int size = dadosBox.getAll().length;
+  // ignore: unused_element
   _setState() {
     size = dadosBox.getAll().length;
   }
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-        flex: 8,
-        child: SizedBox(
-          child: ListView.separated(
-            shrinkWrap: true,
-            itemBuilder: (BuildContext context, int index) {
-              return Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                      width: 120,
-                      height: 120,
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                              fit: BoxFit.fill,
-                              image: FileImage(File(
-                                  atualizarRegistros(index)[0].fotoPath))))),
-                  Column(
-                    children: [
-                      Text(atualizarRegistros(index)[0].local),
-                      Text(atualizarRegistros(index)[0].tag.toString())
-                    ],
-                  ),
-                  FloatingActionButton(onPressed: () {
-                    print('fodasi');
-                  })
-                ],
-              );
-            },
-            separatorBuilder: (BuildContext context, int index) {
-              return const Divider();
-            },
-            itemCount: size,
-          ),
-        ));
+    return SizedBox(
+      child: ListView.separated(
+        shrinkWrap: true,
+        itemBuilder: (BuildContext context, int index) {
+          return Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Container(
+                  width: 120,
+                  height: 120,
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                          fit: BoxFit.fill,
+                          image: FileImage(
+                              File(atualizarRegistros(index)[0].fotoPath))))),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 2),
+                      child: Text(
+                        atualizarRegistros(index)[0].local,
+                        textAlign: TextAlign.left,
+                        style: titleFont(),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 2),
+                      child: Text(atualizarRegistros(index)[0].tag.toString(),
+                          textAlign: TextAlign.left,
+                          style: titleFont(cor: Colors.black)),
+                    )
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 100),
+                child: IconButton(
+                    icon: const Icon(Icons.arrow_forward_ios_outlined,
+                        color: cor_senai, size: 40),
+                    onPressed: () {
+                      Dados item = atualizarRegistros(index)[0];
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(
+                          builder: (context) => EditScreen(item: item)));
+                    }),
+              )
+            ],
+          );
+        },
+        separatorBuilder: (BuildContext context, int index) {
+          return const Divider();
+        },
+        itemCount: size,
+      ),
+    );
   }
 }

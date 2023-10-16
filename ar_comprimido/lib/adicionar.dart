@@ -66,7 +66,7 @@ class _AddScreenState extends State<AddScreen> {
         if (dadosBox.getAll().isEmpty) {
           tag = 0;
         } else {
-          tag = dadosBox.getAll().length; // ARRUMAR TUDO ISSO AQUI
+          tag = dadosBox.getAll().length;
         }
       }
     }
@@ -80,7 +80,7 @@ class _AddScreenState extends State<AddScreen> {
         appBar: PreferredSize(
             preferredSize: const Size.fromHeight(60),
             child: AppBar(
-                backgroundColor: const Color.fromRGBO(0, 108, 181, 1),
+                backgroundColor: cor_senai,
                 title: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
@@ -95,23 +95,22 @@ class _AddScreenState extends State<AddScreen> {
                 padding: const EdgeInsets.all(30),
                 child: Column(
                   children: [
-                    FloatingActionButton(onPressed: () async {
-                      // -----
-                      print(dadosBox.getAll());
-                      Query<Dados> query = dadosBox
-                          .query(Dados_.local.equals('Teste 1'))
-                          .build();
-                      List<Dados> teste1 = query.find();
-                      print(teste1[0].local);
-                      query.close();
-                      Directory dir = await getApplicationDocumentsDirectory();
-                      Directory obxDir = Directory("${dir.path}/obx-example");
-                      print(obxDir.listSync());
-                      File obx = File("${obxDir.path}/data.mdb");
-                      List<String> content = await obx.readAsLines();
-                      print(content);
-                      // -----
-                    }),
+                    // FloatingActionButton(onPressed: () async {
+                    //   // -----
+                    //   print(dadosBox.getAll());
+                    //   Query<Dados> query =
+                    //       dadosBox.query(Dados_.tag.greaterOrEqual(0)).build();
+                    //   List<Dados> teste1 = query.find();
+                    //   print(teste1[0].local);
+                    //   query.close();
+                    //   //Directory dir = await getApplicationDocumentsDirectory();
+                    //   //Directory obxDir = Directory("${dir.path}/obx-example");
+                    //   //print(obxDir.listSync());
+                    //   //File obx = File("${obxDir.path}/data.mdb");
+                    //   //List<String> content = await obx.readAsLines();
+                    //   // print(content);
+                    //   // -----
+                    // }),
                     Local(
                       titleController: titleControllerLocal,
                       local: (novoLocal) {
@@ -579,8 +578,6 @@ class _FotoState extends State<Foto> {
   File? imageFile;
 
   pick(ImageSource source) async {
-    //XFile? treco = await imagePicker.pickImage(source: ImageSource.camera);
-    //await Gal.putImage(treco!.path, album: 'Fotos');
     final pickedFile = await imagePicker.pickImage(source: source);
     if (pickedFile != null) {
       setState(() {
