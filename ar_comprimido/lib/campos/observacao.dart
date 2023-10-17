@@ -26,7 +26,7 @@ class _ObservacaoState extends State<Observacao> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           const Text(
-            "Local",
+            "Observação",
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 30),
           ),

@@ -5,6 +5,7 @@ import 'package:ar_comprimido/database/objectbox.g.dart';
 import 'package:flutter/material.dart';
 import './main.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
 import 'dart:core';
 import 'package:path/path.dart' as path;
 import 'package:gal/gal.dart';
@@ -102,22 +103,25 @@ class _AddScreenState extends State<AddScreen> {
                 padding: const EdgeInsets.all(30),
                 child: Column(
                   children: [
-                    // FloatingActionButton(onPressed: () async {
-                    //   // -----
-                    //   print(dadosBox.getAll());
-                    //   Query<Dados> query =
-                    //       dadosBox.query(Dados_.tag.greaterOrEqual(0)).build();
-                    //   List<Dados> teste1 = query.find();
-                    //   print(teste1[0].local);
-                    //   query.close();
-                    //   //Directory dir = await getApplicationDocumentsDirectory();
-                    //   //Directory obxDir = Directory("${dir.path}/obx-example");
-                    //   //print(obxDir.listSync());
-                    //   //File obx = File("${obxDir.path}/data.mdb");
-                    //   //List<String> content = await obx.readAsLines();
-                    //   // print(content);
-                    //   // -----
-                    // }),
+                    FloatingActionButton(
+                        heroTag: 'teste',
+                        onPressed: () async {
+                          // -----
+                          print(dadosBox.getAll());
+                          Query<Dados> query = dadosBox
+                              .query(Dados_.tag.greaterOrEqual(0))
+                              .build();
+                          // List<Dados> teste1 = query.find();
+                          // print(teste1[0].local);
+                          query.close();
+                          Directory dir =
+                              await getApplicationDocumentsDirectory();
+                          Directory obxDir =
+                              Directory("${dir.path}/obx-example");
+                          print(dir.listSync());
+                          File obx = File("${obxDir.path}/data.mdb");
+                          // -----
+                        }),
                     Local(
                       titleController: titleControllerLocal,
                       local: (novoLocal) {

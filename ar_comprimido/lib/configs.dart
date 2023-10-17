@@ -14,11 +14,13 @@ class ConfigsScreen extends StatefulWidget {
 class _ConfigsScreenState extends State<ConfigsScreen> {
   void apagarFotos() async {
     int i = 1;
-    while (i <= dadosBox.getAll().length) {
-      print(dadosBox.get(i)!.fotoPath);
-      await File(dadosBox.get(i)!.fotoPath).delete();
-      i++;
-    }
+    await File('/data/user/0/com.example.ar_comprimido/app_flutter/out.zip')
+        .delete();
+    // while (i <= dadosBox.getAll().length) {
+    //   print(dadosBox.get(i)!.fotoPath);
+    //   await File(dadosBox.get(i)!.fotoPath).delete();
+    //   i++;
+    // }
   }
 
   @override
@@ -69,7 +71,7 @@ class _ConfigsScreenState extends State<ConfigsScreen> {
                   ),
                   FloatingActionButton.extended(
                       heroTag: 'delete',
-                      onPressed: () {
+                      onPressed: () async {
                         Future<void> showMyDialog() async {
                           return showDialog<void>(
                               context: context,
@@ -81,6 +83,9 @@ class _ConfigsScreenState extends State<ConfigsScreen> {
                         }
 
                         showMyDialog();
+                        await File(
+                                '/data/user/0/com.example.ar_comprimido/app_flutter/out.zip')
+                            .delete();
                       },
                       backgroundColor: const Color.fromRGBO(0, 108, 181, 1),
                       label: const Text('Excluir dados',
