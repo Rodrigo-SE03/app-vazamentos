@@ -57,13 +57,13 @@ class Icones extends StatelessWidget {
         onPressed: () {
           if (icon.icon == add.icon) {
             Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => AddScreen()));
+                MaterialPageRoute(builder: (context) => const AddScreen()));
           } else if (icon.icon == settings.icon) {
             Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => ConfigsScreen()));
+                MaterialPageRoute(builder: (context) => const ConfigsScreen()));
           } else {
             Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => MyApp()));
+                MaterialPageRoute(builder: (context) => const MyApp()));
           }
         },
         icon: icon);
@@ -96,6 +96,7 @@ class MyHomePage extends StatelessWidget {
   }
 }
 
+// ARRUMAR A QUESTÃO DOS ITENS MUDAREM QUANDO APAGO UM DO MEIO
 class ListaRegistros extends StatefulWidget {
   const ListaRegistros({
     super.key,
@@ -106,20 +107,15 @@ class ListaRegistros extends StatefulWidget {
 }
 
 class _ListaRegistrosState extends State<ListaRegistros> {
-  List<Dados> atualizarRegistros(int tag) {
-    Query<Dados> query = dadosBox.query(Dados_.tag.greaterOrEqual(tag)).build();
+  List<Dados> atualizarRegistros() {
+    Query<Dados> query = dadosBox.query(Dados_.tag.greaterOrEqual(0)).build();
     return query.find();
-  }
-
-  int size = dadosBox.getAll().length;
-  // ignore: unused_element
-  _setState() {
-    size = dadosBox.getAll().length;
   }
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
+      height: MediaQuery.of(context).size.height - 108,
       child: ListView.separated(
         shrinkWrap: true,
         itemBuilder: (BuildContext context, int index) {
@@ -127,13 +123,13 @@ class _ListaRegistrosState extends State<ListaRegistros> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Container(
-                  width: 120,
+                  width: 90,
                   height: 120,
                   decoration: BoxDecoration(
                       image: DecorationImage(
                           fit: BoxFit.fill,
                           image: FileImage(
-                              File(atualizarRegistros(index)[0].fotoPath))))),
+                              File(atualizarRegistros()[index].fotoPath))))),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Column(
@@ -142,14 +138,14 @@ class _ListaRegistrosState extends State<ListaRegistros> {
                     Padding(
                       padding: const EdgeInsets.only(bottom: 2),
                       child: Text(
-                        atualizarRegistros(index)[0].local,
+                        atualizarRegistros()[index].local,
                         textAlign: TextAlign.left,
                         style: titleFont(),
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 2),
-                      child: Text(atualizarRegistros(index)[0].tag.toString(),
+                      child: Text(atualizarRegistros()[index].tag.toString(),
                           textAlign: TextAlign.left,
                           style: titleFont(cor: Colors.black)),
                     )
@@ -162,7 +158,7 @@ class _ListaRegistrosState extends State<ListaRegistros> {
                     icon: const Icon(Icons.arrow_forward_ios_outlined,
                         color: cor_senai, size: 40),
                     onPressed: () {
-                      Dados item = atualizarRegistros(index)[0];
+                      Dados item = atualizarRegistros()[index];
                       Navigator.of(context).pushReplacement(MaterialPageRoute(
                           builder: (context) => EditScreen(item: item)));
                     }),
@@ -173,7 +169,7 @@ class _ListaRegistrosState extends State<ListaRegistros> {
         separatorBuilder: (BuildContext context, int index) {
           return const Divider();
         },
-        itemCount: size,
+        itemCount: dadosBox.getAll().length,
       ),
     );
   }

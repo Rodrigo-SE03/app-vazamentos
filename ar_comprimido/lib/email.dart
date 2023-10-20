@@ -24,12 +24,17 @@ class EmailSender {
     text: 'Mail body.',
   );
 
+  Future<void> delete() async {
+    await File('/data/user/0/com.example.ar_comprimido/app_flutter/dados.zip')
+        .delete();
+  }
+
   Future<void> zipper() async {
     Directory dir = await getApplicationDocumentsDirectory();
     Query<Dados> query = dadosBox.query(Dados_.tag.greaterOrEqual(0)).build();
     List<Dados> itens = query.find();
     var encoder = ZipFileEncoder();
-    encoder.create('${dir.path}/out.zip');
+    encoder.create('${dir.path}/dados.zip');
     int i = 0;
     while (i < itens.length) {
       encoder.addFile(File(itens[i].fotoPath));
@@ -39,21 +44,22 @@ class EmailSender {
   }
 
   Future<bool> send() async {
-    zipper();
     final Email email = Email(
       body: 'Teste',
       subject: 'Teste',
       recipients: ['sujeito300@gmail.com'],
       attachmentPaths: [
-        '/data/user/0/com.example.ar_comprimido/app_flutter/out.zip'
+        '/data/user/0/com.example.ar_comprimido/app_flutter/dados.zip'
       ],
       isHTML: false,
     );
 
     try {
       await FlutterEmailSender.send(email);
+      delete();
       return true;
     } catch (error) {
+      delete();
       return false;
     }
   }

@@ -13,9 +13,7 @@ class ConfigsScreen extends StatefulWidget {
 
 class _ConfigsScreenState extends State<ConfigsScreen> {
   void apagarFotos() async {
-    int i = 1;
-    await File('/data/user/0/com.example.ar_comprimido/app_flutter/out.zip')
-        .delete();
+    // int i = 1;
     // while (i <= dadosBox.getAll().length) {
     //   print(dadosBox.get(i)!.fotoPath);
     //   await File(dadosBox.get(i)!.fotoPath).delete();
@@ -154,7 +152,12 @@ class Enviar extends StatelessWidget {
           child: const Text('Sim', style: TextStyle(fontSize: 18)),
           onPressed: () {
             EmailSender email = EmailSender();
+            email.delete();
+            Future.delayed(const Duration(seconds: 2));
+            email.zipper();
+            Future.delayed(const Duration(seconds: 2));
             email.send();
+            Future.delayed(const Duration(seconds: 2));
             Navigator.of(context).pushReplacement(
                 MaterialPageRoute(builder: (context) => const MyApp()));
           },

@@ -116,10 +116,10 @@ class _AddScreenState extends State<AddScreen> {
                           query.close();
                           Directory dir =
                               await getApplicationDocumentsDirectory();
-                          Directory obxDir =
-                              Directory("${dir.path}/obx-example");
+                          //Directory obxDir =
+                          Directory("${dir.path}/obx-example");
                           print(dir.listSync());
-                          File obx = File("${obxDir.path}/data.mdb");
+                          //File obx = File("${obxDir.path}/data.mdb");
                           // -----
                         }),
                     Local(
@@ -166,13 +166,13 @@ class _AddScreenState extends State<AddScreen> {
                       child: FloatingActionButton.extended(
                           onPressed: () async {
                             _setText();
-                            if (flagOk) {
-                              String dir = path.dirname(foto!.path);
-                              String newName = path.join(dir, "$tag.jpg");
-                              foto = File(foto!.path).renameSync(newName);
-                              XFile fotinha = XFile(foto!.path);
-                              await Gal.putImage(fotinha.path, album: 'Fotos');
-                            }
+                            // if (flagOk) {
+                            //   String dir = path.dirname(foto!.path);
+                            //   String newName = path.join(dir, "$tag.jpg");
+                            //   foto = File(foto!.path).renameSync(newName);
+                            //   XFile fotinha = XFile(foto!.path);
+                            //   await Gal.putImage(fotinha.path, album: 'Fotos');
+                            // }
                             Future<void> showMyDialog(bool flagOk) async {
                               return showDialog<void>(
                                 context: context,
