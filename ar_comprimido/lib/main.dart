@@ -96,7 +96,6 @@ class MyHomePage extends StatelessWidget {
   }
 }
 
-// ARRUMAR A QUESTÃO DOS ITENS MUDAREM QUANDO APAGO UM DO MEIO
 class ListaRegistros extends StatefulWidget {
   const ListaRegistros({
     super.key,

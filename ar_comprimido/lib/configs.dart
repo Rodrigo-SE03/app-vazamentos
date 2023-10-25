@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import './main.dart';
+import 'package:photo_manager/photo_manager.dart';
 import './email.dart';
 
 class ConfigsScreen extends StatefulWidget {
@@ -12,15 +13,6 @@ class ConfigsScreen extends StatefulWidget {
 }
 
 class _ConfigsScreenState extends State<ConfigsScreen> {
-  void apagarFotos() async {
-    // int i = 1;
-    // while (i <= dadosBox.getAll().length) {
-    //   print(dadosBox.get(i)!.fotoPath);
-    //   await File(dadosBox.get(i)!.fotoPath).delete();
-    //   i++;
-    // }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,9 +73,6 @@ class _ConfigsScreenState extends State<ConfigsScreen> {
                         }
 
                         showMyDialog();
-                        await File(
-                                '/data/user/0/com.example.ar_comprimido/app_flutter/out.zip')
-                            .delete();
                       },
                       backgroundColor: const Color.fromRGBO(0, 108, 181, 1),
                       label: const Text('Excluir dados',
@@ -95,10 +84,51 @@ class _ConfigsScreenState extends State<ConfigsScreen> {
   }
 }
 
-class Confirmar extends StatelessWidget {
+class Confirmar extends StatefulWidget {
   const Confirmar({
     super.key,
   });
+
+  @override
+  State<Confirmar> createState() => _ConfirmarState();
+}
+
+class _ConfirmarState extends State<Confirmar> {
+  bool isLoading = false;
+
+  void apagarFotos() async {
+    setState(() {
+      isLoading = true;
+    });
+    final List<AssetPathEntity> paths = await PhotoManager.getAssetPathList();
+    for (AssetPathEntity element in paths) {
+      if ("Vazamentos" == element.name) {
+        int numImages = await element.assetCountAsync;
+        List<AssetEntity> assets = await element.getAssetListRange(
+          start: 0,
+          end: numImages,
+        );
+        for (AssetEntity asset in assets) {
+          File? file = await asset.file;
+          if (file == null) {
+            continue;
+          } else {
+            await file.delete();
+          }
+        }
+        // ignore: use_build_context_synchronously
+        if (Platform.isAndroid) {
+          await PhotoManager.editor.android.removeAllNoExistsAsset();
+        }
+        setState(() {
+          isLoading = false;
+        });
+        // ignore: use_build_context_synchronously
+        Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (context) => const MyApp()));
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -109,20 +139,23 @@ class Confirmar extends StatelessWidget {
         style: TextStyle(fontSize: 18),
       ),
       actions: <Widget>[
-        TextButton(
-          child: const Text('Não', style: TextStyle(fontSize: 18)),
-          onPressed: () {
-            Navigator.pop(context, 'Não');
-          },
-        ),
-        TextButton(
-          child: const Text('Sim', style: TextStyle(fontSize: 18)),
-          onPressed: () {
-            dadosBox.removeAll();
-            Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => const MyApp()));
-          },
-        ),
+        !isLoading
+            ? TextButton(
+                child: const Text('Não', style: TextStyle(fontSize: 18)),
+                onPressed: () {
+                  Navigator.pop(context, 'Não');
+                },
+              )
+            : const Text(''),
+        !isLoading
+            ? TextButton(
+                child: const Text('Sim', style: TextStyle(fontSize: 18)),
+                onPressed: () {
+                  apagarFotos();
+                  dadosBox.removeAll();
+                },
+              )
+            : const Center(child: CircularProgressIndicator()),
       ],
     );
   }
@@ -150,14 +183,12 @@ class Enviar extends StatelessWidget {
         ),
         TextButton(
           child: const Text('Sim', style: TextStyle(fontSize: 18)),
-          onPressed: () {
+          onPressed: () async {
             EmailSender email = EmailSender();
-            email.delete();
-            Future.delayed(const Duration(seconds: 2));
-            email.zipper();
-            Future.delayed(const Duration(seconds: 2));
-            email.send();
-            Future.delayed(const Duration(seconds: 2));
+            await email.delete();
+            await email.zipper();
+            await email.send();
+            // ignore: use_build_context_synchronously
             Navigator.of(context).pushReplacement(
                 MaterialPageRoute(builder: (context) => const MyApp()));
           },

@@ -72,9 +72,12 @@ class _AddScreenState extends State<AddScreen> {
       } else {
         flagOk = true;
         if (dadosBox.getAll().isEmpty) {
-          tag = 0;
+          tag = 1;
         } else {
-          tag = dadosBox.getAll().length;
+          Query<Dados> query =
+              dadosBox.query(Dados_.tag.greaterOrEqual(0)).build();
+          List<Dados> listaItens = query.find();
+          tag = listaItens[listaItens.length - 1].tag + 1;
         }
       }
     }
@@ -111,14 +114,14 @@ class _AddScreenState extends State<AddScreen> {
                           Query<Dados> query = dadosBox
                               .query(Dados_.tag.greaterOrEqual(0))
                               .build();
-                          // List<Dados> teste1 = query.find();
-                          // print(teste1[0].local);
+                          List<Dados> teste1 = query.find();
+                          print(teste1[teste1.length - 1].tag);
                           query.close();
-                          Directory dir =
-                              await getApplicationDocumentsDirectory();
+                          // Directory dir =
+                          //     await getApplicationDocumentsDirectory();
                           //Directory obxDir =
-                          Directory("${dir.path}/obx-example");
-                          print(dir.listSync());
+                          //Directory("${dir.path}/obx-example");
+                          //print(dir.listSync());
                           //File obx = File("${obxDir.path}/data.mdb");
                           // -----
                         }),
@@ -166,13 +169,14 @@ class _AddScreenState extends State<AddScreen> {
                       child: FloatingActionButton.extended(
                           onPressed: () async {
                             _setText();
-                            // if (flagOk) {
-                            //   String dir = path.dirname(foto!.path);
-                            //   String newName = path.join(dir, "$tag.jpg");
-                            //   foto = File(foto!.path).renameSync(newName);
-                            //   XFile fotinha = XFile(foto!.path);
-                            //   await Gal.putImage(fotinha.path, album: 'Fotos');
-                            // }
+                            if (flagOk) {
+                              String dir = path.dirname(foto!.path);
+                              String newName = path.join(dir, "$tag.jpg");
+                              foto = File(foto!.path).renameSync(newName);
+                              XFile fotinha = XFile(foto!.path);
+                              await Gal.putImage(fotinha.path,
+                                  album: 'Vazamentos');
+                            }
                             Future<void> showMyDialog(bool flagOk) async {
                               return showDialog<void>(
                                 context: context,

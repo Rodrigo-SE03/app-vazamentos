@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:ar_comprimido/dados.dart';
 import 'package:flutter/material.dart';
+import 'package:photo_manager/photo_manager.dart';
 import './main.dart';
 
 class EditScreen extends StatefulWidget {
@@ -155,9 +156,56 @@ class _EditScreenState extends State<EditScreen> {
   }
 }
 
-class Excluir extends StatelessWidget {
+class Excluir extends StatefulWidget {
   const Excluir({super.key, required this.item});
   final Dados item;
+
+  @override
+  State<Excluir> createState() => _ExcluirState();
+}
+
+class _ExcluirState extends State<Excluir> {
+  bool isLoading = false;
+
+  void deletar() async {
+    setState(() {
+      isLoading = true;
+    });
+    final List<AssetPathEntity> paths = await PhotoManager.getAssetPathList();
+    for (AssetPathEntity element in paths) {
+      if ("Vazamentos" == element.name) {
+        int numImages = await element.assetCountAsync;
+        List<AssetEntity> assets = await element.getAssetListRange(
+          start: 0,
+          end: numImages,
+        );
+        for (AssetEntity asset in assets) {
+          File? file = await asset.file;
+          if (file == null) {
+            continue;
+          } else {
+            final fotoNome =
+                file.path.split('/')[file.path.split('/').length - 1];
+            final fotoDelete = "${widget.item.tag}.jpg";
+            if (fotoNome == fotoDelete) {
+              await file.delete();
+              // ignore: use_build_context_synchronously
+              if (Platform.isAndroid) {
+                await PhotoManager.editor.android.removeAllNoExistsAsset();
+              }
+              setState(() {
+                isLoading = false;
+              });
+            }
+          }
+        }
+        // ignore: use_build_context_synchronously
+        Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (context) => const MyApp()));
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -167,20 +215,23 @@ class Excluir extends StatelessWidget {
         style: TextStyle(fontSize: 18),
       ),
       actions: <Widget>[
-        TextButton(
-          child: const Text('Não', style: TextStyle(fontSize: 18)),
-          onPressed: () {
-            Navigator.pop(context, 'Não');
-          },
-        ),
-        TextButton(
-          child: const Text('Sim', style: TextStyle(fontSize: 18)),
-          onPressed: () {
-            dadosBox.remove(item.id);
-            Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => const MyApp()));
-          },
-        ),
+        !isLoading
+            ? TextButton(
+                child: const Text('Não', style: TextStyle(fontSize: 18)),
+                onPressed: () {
+                  Navigator.pop(context, 'Não');
+                },
+              )
+            : const Text(''),
+        !isLoading
+            ? TextButton(
+                child: const Text('Sim', style: TextStyle(fontSize: 18)),
+                onPressed: () {
+                  deletar();
+                  dadosBox.remove(widget.item.id);
+                },
+              )
+            : const Center(child: CircularProgressIndicator()),
       ],
     );
   }
