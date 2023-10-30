@@ -17,8 +17,21 @@ class Observacao extends StatefulWidget {
 }
 
 class _ObservacaoState extends State<Observacao> {
+  final itens = dadosBox.query().build().property(Dados_.obs).find();
   bool isChecked = false;
   List<DropdownMenuEntry> listaRepetidos = [];
+
+  bool obsVazio(List<String> itens) {
+    int i = 0;
+    while (i < itens.length) {
+      if (itens[i] != "") {
+        return false;
+      }
+      i++;
+    }
+    return true;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(children: [
@@ -32,10 +45,10 @@ class _ObservacaoState extends State<Observacao> {
           ),
           Row(children: [
             Checkbox(
-                value: dadosBox.getAll().isEmpty ? false : isChecked,
+                value: obsVazio(itens) ? false : isChecked,
                 onChanged: (bool? value) {
                   setState(() {
-                    if (dadosBox.getAll().isEmpty) {
+                    if (obsVazio(itens)) {
                       isChecked = false;
                     } else {
                       isChecked = value!;

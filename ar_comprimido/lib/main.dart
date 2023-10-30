@@ -4,6 +4,7 @@ import 'package:ar_comprimido/adicionar.dart';
 import 'package:ar_comprimido/configs.dart';
 import 'package:ar_comprimido/database/objectbox.g.dart';
 import 'package:ar_comprimido/edit.dart';
+import 'package:ar_comprimido/info.dart';
 import 'package:flutter/material.dart';
 import './database/objectbox_databse.dart';
 import './dados.dart';
@@ -14,6 +15,10 @@ const cor_senai = Color.fromRGBO(0, 108, 181, 1);
 
 TextStyle titleFont({Color cor = cor_senai, double size = 20}) {
   return TextStyle(fontSize: size, fontWeight: FontWeight.bold, color: cor);
+}
+
+TextStyle bodyFont({Color cor = Colors.black, double size = 20}) {
+  return TextStyle(fontSize: size, color: cor);
 }
 
 late ObjectBox objectbox;
@@ -48,6 +53,8 @@ class Icones extends StatelessWidget {
       color: Colors.white, size: 40);
   final Icon settings =
       const Icon(Icons.settings, color: Colors.white, size: 40);
+  final Icon info =
+      const Icon(Icons.info_outline, color: Colors.white, size: 40);
   Box<Dados>? dadosBox;
   Icones(this.icon, {super.key, this.dadosBox});
 
@@ -61,6 +68,9 @@ class Icones extends StatelessWidget {
           } else if (icon.icon == settings.icon) {
             Navigator.of(context).pushReplacement(
                 MaterialPageRoute(builder: (context) => const ConfigsScreen()));
+          } else if (icon.icon == info.icon) {
+            Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (context) => const InfoScreen()));
           } else {
             Navigator.of(context).pushReplacement(
                 MaterialPageRoute(builder: (context) => const MyApp()));
@@ -85,6 +95,8 @@ class MyHomePage extends StatelessWidget {
                     children: <Widget>[
                       Image.asset('assets/images/senai_logo.png',
                           fit: BoxFit.contain, height: 50),
+                      Icones(const Icon(Icons.info_outline,
+                          color: Colors.white, size: 40)),
                       Icones(const Icon(Icons.settings,
                           color: Colors.white, size: 40)),
                       Icones(const Icon(Icons.add_circle_outline_rounded,

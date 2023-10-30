@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:ar_comprimido/database/objectbox.g.dart';
 import 'package:flutter/material.dart';
 import './main.dart';
+import 'package:photo_manager/photo_manager.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:core';
@@ -41,6 +42,7 @@ class _AddScreenState extends State<AddScreen> {
   String data = "";
   String qtd = "";
   File? foto;
+  String fotoPath = "";
   bool flagOk = false;
 
   void _setText() {
@@ -85,6 +87,36 @@ class _AddScreenState extends State<AddScreen> {
     atualizarDados();
   }
 
+  Future<String> pegarFoto(int tag) async {
+    final List<AssetPathEntity> paths = await PhotoManager.getAssetPathList();
+    print(paths);
+    for (AssetPathEntity element in paths) {
+      if ("Vazamentos" == element.name) {
+        print('1');
+        int numImages = await element.assetCountAsync;
+        List<AssetEntity> assets = await element.getAssetListRange(
+          start: 0,
+          end: numImages,
+        );
+        for (AssetEntity asset in assets) {
+          File? file = await asset.file;
+          if (file == null) {
+            continue;
+          } else {
+            final fotoNome =
+                file.path.split('/')[file.path.split('/').length - 1];
+            print('2 $fotoNome');
+            final fotoSave = "$tag.jpg";
+            if (fotoNome == fotoSave) {
+              return file.path;
+            }
+          }
+        }
+      }
+    }
+    return 'falhou';
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -106,25 +138,28 @@ class _AddScreenState extends State<AddScreen> {
                 padding: const EdgeInsets.all(30),
                 child: Column(
                   children: [
-                    FloatingActionButton(
-                        heroTag: 'teste',
-                        onPressed: () async {
-                          // -----
-                          print(dadosBox.getAll());
-                          Query<Dados> query = dadosBox
-                              .query(Dados_.tag.greaterOrEqual(0))
-                              .build();
-                          List<Dados> teste1 = query.find();
-                          print(teste1[teste1.length - 1].tag);
-                          query.close();
-                          // Directory dir =
-                          //     await getApplicationDocumentsDirectory();
-                          //Directory obxDir =
-                          //Directory("${dir.path}/obx-example");
-                          //print(dir.listSync());
-                          //File obx = File("${obxDir.path}/data.mdb");
-                          // -----
-                        }),
+                    // FloatingActionButton(
+                    //     heroTag: 'teste',
+                    //     onPressed: () async {
+                    //       // -----
+                    //       //print(dadosBox.getAll());
+                    //       // Query<Dados> query = dadosBox
+                    //       //     .query(Dados_.tag.greaterOrEqual(0))
+                    //       //     .build();
+                    //       // print(dadosBox
+                    //       //     .query()
+                    //       //     .build()
+                    //       //     .property(Dados_.obs)
+                    //       //     .find());
+                    //       // List<Dados> teste1 = query.find();
+                    //       //print(teste1[teste1.length - 1].fotoPath);
+                    //       // query.close();
+                    //       Directory dir =
+                    //           await getApplicationDocumentsDirectory();
+
+                    //       print(dir.listSync());
+                    //       // -----
+                    //     }),
                     Local(
                       titleController: titleControllerLocal,
                       local: (novoLocal) {
@@ -176,12 +211,12 @@ class _AddScreenState extends State<AddScreen> {
                               XFile fotinha = XFile(foto!.path);
                               await Gal.putImage(fotinha.path,
                                   album: 'Vazamentos');
+                              fotoPath = await pegarFoto(tag);
                             }
                             Future<void> showMyDialog(bool flagOk) async {
                               return showDialog<void>(
                                 context: context,
-                                barrierDismissible:
-                                    false, // user must tap button!
+                                barrierDismissible: false,
                                 builder: (BuildContext context) {
                                   return AlertaDeRegistro(
                                     classificacao: classificacao,

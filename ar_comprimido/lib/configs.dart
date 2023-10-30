@@ -150,8 +150,10 @@ class _ConfirmarState extends State<Confirmar> {
         !isLoading
             ? TextButton(
                 child: const Text('Sim', style: TextStyle(fontSize: 18)),
-                onPressed: () {
+                onPressed: () async {
                   apagarFotos();
+                  EmailSender email = EmailSender();
+                  await email.delete();
                   dadosBox.removeAll();
                 },
               )

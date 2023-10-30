@@ -14,7 +14,8 @@ class _FotoState extends State<Foto> {
   File? imageFile;
 
   pick(ImageSource source) async {
-    final pickedFile = await imagePicker.pickImage(source: source);
+    final pickedFile =
+        await imagePicker.pickImage(source: source, imageQuality: 20);
     if (pickedFile != null) {
       setState(() {
         imageFile = File(pickedFile.path);
