@@ -63,10 +63,10 @@ class InfoScreen extends StatelessWidget {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 10),
             child: Text(
-              'Para apagar os dados salvos, basta ir na tela de configurações e pressionar a opção "Excluir Dados". Essa opção apagará todos os registros e fotos, o que pode levar algum tempo dependendo da quantidade de elementos registrados.',
+              'Para apagar os dados salvos, basta ir na tela de configurações e pressionar a opção "Excluir Dados". Essa opção apagará todos os registros e fotos, o que pode levar algum tempo dependendo da quantidade de elementos registrados.\nAlgumas coisas ficarão salvas na memória cache do aplicativo. Para removê-las é necessário acessar os dados do aplicativo e excluir a memória cache e dados salvos.',
               style: bodyFont(),
               textAlign: TextAlign.justify,
-            ),
+            ), //Seria bom colocar uma imagem disso nessa parte
           ),
           Padding(
             padding: EdgeInsets.only(left: 10, right: 10, top: 20),

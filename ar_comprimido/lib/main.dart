@@ -132,6 +132,7 @@ class _ListaRegistrosState extends State<ListaRegistros> {
         itemBuilder: (BuildContext context, int index) {
           return Row(
             mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisSize: MainAxisSize.max,
             children: [
               Container(
                   width: 90,
@@ -162,6 +163,9 @@ class _ListaRegistrosState extends State<ListaRegistros> {
                     )
                   ],
                 ),
+              ),
+              const Spacer(
+                flex: 1,
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 100),
