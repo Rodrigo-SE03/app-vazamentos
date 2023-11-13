@@ -12,6 +12,7 @@
     <application
         android:label="ar_comprimido"
         android:name="${applicationName}"
+        android:roundIcon="@mipmap/icon"
         android:icon="@mipmap/ic_launcher"
         android:requestLegacyExternalStorage="true">
         <activity

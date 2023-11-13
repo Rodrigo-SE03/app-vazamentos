@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:ar_comprimido/help.dart';
 import 'package:flutter/material.dart';
 import './main.dart';
 
@@ -18,8 +19,14 @@ class InfoScreen extends StatelessWidget {
                     children: <Widget>[
                       Image.asset('assets/images/senai_logo.png',
                           fit: BoxFit.contain, height: 50),
-                      Icones(const Icon(Icons.arrow_circle_left_outlined,
-                          color: Colors.white, size: 40))
+                      IconButton(
+                          onPressed: () {
+                            Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                    builder: (context) => const HelpScreen()));
+                          },
+                          icon: const Icon(Icons.arrow_circle_left_outlined,
+                              color: Colors.white, size: 40))
                     ]))),
         body: Center(
             child: ListView(shrinkWrap: false, children: [

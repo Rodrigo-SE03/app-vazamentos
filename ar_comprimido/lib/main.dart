@@ -4,7 +4,7 @@ import 'package:ar_comprimido/adicionar.dart';
 import 'package:ar_comprimido/configs.dart';
 import 'package:ar_comprimido/database/objectbox.g.dart';
 import 'package:ar_comprimido/edit.dart';
-import 'package:ar_comprimido/info.dart';
+import 'package:ar_comprimido/help.dart';
 import 'package:flutter/material.dart';
 import './database/objectbox_databse.dart';
 import './dados.dart';
@@ -70,7 +70,7 @@ class Icones extends StatelessWidget {
                 MaterialPageRoute(builder: (context) => const ConfigsScreen()));
           } else if (icon.icon == info.icon) {
             Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => const InfoScreen()));
+                MaterialPageRoute(builder: (context) => const HelpScreen()));
           } else {
             Navigator.of(context).pushReplacement(
                 MaterialPageRoute(builder: (context) => const MyApp()));
@@ -126,7 +126,7 @@ class _ListaRegistrosState extends State<ListaRegistros> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: MediaQuery.of(context).size.height - 108,
+      height: MediaQuery.of(context).size.height - 140,
       child: ListView.separated(
         shrinkWrap: true,
         itemBuilder: (BuildContext context, int index) {

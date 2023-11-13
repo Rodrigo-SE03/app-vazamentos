@@ -171,7 +171,7 @@ class Enviar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Text('Excluir dados'),
+      title: const Text('Enviar dados'),
       content: const Text(
         'Tem certeza que deseja enviar os dados?',
         style: TextStyle(fontSize: 18),
