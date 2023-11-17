@@ -1,3 +1,4 @@
+import 'package:ar_comprimido/detalhes.dart';
 import 'package:ar_comprimido/help.dart';
 import 'package:flutter/material.dart';
 import './main.dart';
@@ -29,13 +30,15 @@ class Referencias extends StatelessWidget {
         body: Center(
             child: Padding(
                 padding:
-                    const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
+                    const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
                 child: Column(children: [
                   SizedBox(
                       height: MediaQuery.of(context).size.height - 160,
                       child: ListView(shrinkWrap: true, children: [
-                        Itens('engate_rapido', 'Conexão de Engate Rápido'),
-                        Itens('valvula_solenoide', 'Válvula Solenoide')
+                        Itens('engate_rapido',
+                            'Conexão pneumática de engate rápido'),
+                        Itens('rosca', 'Conexão pneumática de rosca'),
+                        Itens('valvula_solenoide', 'Válvula solenoide'),
                       ]))
                 ]))));
   }
@@ -77,6 +80,19 @@ class Itens extends StatelessWidget {
             ],
           ),
         ),
+        const Spacer(
+          flex: 1,
+        ),
+        Padding(
+          padding: const EdgeInsets.only(left: 1),
+          child: IconButton(
+              icon: const Icon(Icons.arrow_forward_ios_outlined,
+                  color: cor_senai, size: 40),
+              onPressed: () {
+                Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    builder: (context) => Detalhes(componente, imagem)));
+              }),
+        )
       ],
     );
   }
