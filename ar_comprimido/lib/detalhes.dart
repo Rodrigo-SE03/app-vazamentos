@@ -3,6 +3,7 @@ import 'package:ar_comprimido/referencias.dart';
 import 'package:flutter/material.dart';
 import './main.dart';
 
+// ignore: must_be_immutable
 class Detalhes extends StatelessWidget {
   String componente;
   String imagem;
