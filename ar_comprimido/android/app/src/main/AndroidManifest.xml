@@ -10,7 +10,7 @@
       </intent>
     </queries>
     <application
-        android:label="ar_comprimido"
+        android:label="Registro de Fugas"
         android:name="${applicationName}"
         android:roundIcon="@mipmap/icon"
         android:icon="@mipmap/ic_launcher"

@@ -131,10 +131,11 @@ class _EditScreenState extends State<EditScreen> {
                 Container(
                     width: 200,
                     height: 250,
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                            fit: BoxFit.fill,
-                            image: FileImage(File(widget.item.fotoPath))))),
+                    // decoration: BoxDecoration(
+                    //     image: DecorationImage(
+                    //         fit: BoxFit.fill,
+                    //         image: FileImage(File(widget.item.fotoPath))))
+                    child: Image(image: FileImage(File(widget.item.fotoPath)))),
                 const Divider(
                   height: 20,
                   color: Colors.white,

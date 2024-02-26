@@ -1,4 +1,4 @@
-import 'dart:io';
+// import 'dart:io';
 
 import 'package:ar_comprimido/adicionar.dart';
 import 'package:ar_comprimido/configs.dart';
@@ -134,14 +134,14 @@ class _ListaRegistrosState extends State<ListaRegistros> {
             mainAxisAlignment: MainAxisAlignment.start,
             mainAxisSize: MainAxisSize.max,
             children: [
-              Container(
-                  width: 90,
-                  height: 120,
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                          fit: BoxFit.fill,
-                          image: FileImage(
-                              File(atualizarRegistros()[index].fotoPath))))),
+              // Container(
+              //     width: 90,
+              //     height: 120,
+              //     decoration: BoxDecoration(
+              //         image: DecorationImage(
+              //             fit: BoxFit.fill,
+              //             image: FileImage(
+              //                 File(atualizarRegistros()[index].fotoPath))))),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Column(
@@ -150,14 +150,14 @@ class _ListaRegistrosState extends State<ListaRegistros> {
                     Padding(
                       padding: const EdgeInsets.only(bottom: 2),
                       child: Text(
-                        atualizarRegistros()[index].local,
+                        "${atualizarRegistros()[index].local} - ${atualizarRegistros()[index].tag}",
                         textAlign: TextAlign.left,
                         style: titleFont(),
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 2),
-                      child: Text(atualizarRegistros()[index].tag.toString(),
+                      child: Text(atualizarRegistros()[index].componente.toString(),
                           textAlign: TextAlign.left,
                           style: titleFont(cor: Colors.black)),
                     )
