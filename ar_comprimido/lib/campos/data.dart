@@ -15,7 +15,7 @@ class Data extends StatelessWidget {
         const Text(
           "Data",
           textAlign: TextAlign.left,
-          style: TextStyle(fontSize: 30),
+          style: TextStyle(fontSize: 28),
         ),
         SizedBox(
             width: 120,

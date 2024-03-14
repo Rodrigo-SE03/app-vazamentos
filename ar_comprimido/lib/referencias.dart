@@ -62,7 +62,7 @@ class Itens extends StatelessWidget {
                 image: DecorationImage(
                     image: AssetImage('assets/componentes/$imagem.png')))),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.only(left: 10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -70,10 +70,13 @@ class Itens extends StatelessWidget {
                 padding: const EdgeInsets.only(bottom: 2),
                 child: SizedBox(
                   width: 200,
-                  child: Text(
-                    componente,
-                    textAlign: TextAlign.left,
-                    style: titleFont(),
+                  child: Expanded(
+                    flex:2,
+                    child: Text(
+                      componente,
+                      textAlign: TextAlign.left,
+                      style: titleFont(),
+                    ),
                   ),
                 ),
               ),
@@ -85,13 +88,16 @@ class Itens extends StatelessWidget {
         ),
         Padding(
           padding: const EdgeInsets.only(left: 1),
-          child: IconButton(
-              icon: const Icon(Icons.arrow_forward_ios_outlined,
-                  color: cor_senai, size: 40),
-              onPressed: () {
-                Navigator.of(context).pushReplacement(MaterialPageRoute(
-                    builder: (context) => Detalhes(componente, imagem)));
-              }),
+          child: Expanded(
+            flex:2,
+            child: IconButton(
+                icon: const Icon(Icons.arrow_forward_ios_outlined,
+                    color: cor_senai, size: 40),
+                onPressed: () {
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: (context) => Detalhes(componente, imagem)));
+                }),
+          ),
         )
       ],
     );
