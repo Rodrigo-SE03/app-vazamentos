@@ -134,7 +134,7 @@ class _ListaRegistrosState extends State<ListaRegistros> {
             mainAxisAlignment: MainAxisAlignment.start,
             mainAxisSize: MainAxisSize.max,
             children: [
-              // Container(
+              // Container(                       //Imagem mostrada na lista - retirada por limitação de hardware para rendrizar várias imagens
               //     width: 90,
               //     height: 120,
               //     decoration: BoxDecoration(
@@ -144,40 +144,40 @@ class _ListaRegistrosState extends State<ListaRegistros> {
               //                 File(atualizarRegistros()[index].fotoPath))))),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 2),
-                      child: Text(
-                        "${atualizarRegistros()[index].local} - ${atualizarRegistros()[index].tag}",
-                        textAlign: TextAlign.left,
-                        style: titleFont(),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 2),
-                      child: Text(atualizarRegistros()[index].componente.toString(),
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width - 150,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 2),
+                        child: Text(
+                          "${atualizarRegistros()[index].local} - ${atualizarRegistros()[index].tag}",
                           textAlign: TextAlign.left,
-                          style: titleFont(cor: Colors.black)),
-                    )
-                  ],
+                          style: titleFont(),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 2),
+                        child: Text(atualizarRegistros()[index].componente.toString(),
+                            textAlign: TextAlign.left,
+                            style: titleFont(cor: Colors.black)),
+                      )
+                    ],
+                  ),
                 ),
               ),
               const Spacer(
                 flex: 1,
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 100),
-                child: IconButton(
-                    icon: const Icon(Icons.arrow_forward_ios_outlined,
-                        color: cor_senai, size: 40),
-                    onPressed: () {
-                      Dados item = atualizarRegistros()[index];
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: (context) => EditScreen(item: item)));
-                    }),
-              )
+              IconButton(
+                  icon: const Icon(Icons.arrow_forward_ios_outlined,
+                      color: cor_senai, size: 40),
+                  onPressed: () {
+                    Dados item = atualizarRegistros()[index];
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                        builder: (context) => EditScreen(item: item)));
+                  })
             ],
           );
         },
