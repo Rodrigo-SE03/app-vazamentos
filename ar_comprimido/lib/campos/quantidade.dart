@@ -18,7 +18,7 @@ class _QuantidadeState extends State<Quantidade> {
         const Text(
           "Quantidade",
           textAlign: TextAlign.left,
-          style: TextStyle(fontSize: 28),
+          style: TextStyle(fontSize: 30),
         ),
         Padding(
             padding: const EdgeInsets.symmetric(vertical: 6),

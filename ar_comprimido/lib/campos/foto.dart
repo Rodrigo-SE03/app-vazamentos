@@ -33,7 +33,7 @@ class _FotoState extends State<Foto> {
           child: Text(
             "Foto",
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 28),
+            style: TextStyle(fontSize: 30),
           ),
         ),
         SizedBox(

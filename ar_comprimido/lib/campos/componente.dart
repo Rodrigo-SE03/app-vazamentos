@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:ar_comprimido/main.dart';
 import 'package:ar_comprimido/dados.dart';
 import 'package:ar_comprimido/database/objectbox.g.dart';
-import 'package:flutter/widgets.dart';
 
 class Componente extends StatefulWidget {
   const Componente({
@@ -26,13 +25,10 @@ class _ComponenteState extends State<Componente> {
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Expanded(
-            flex: 2,
-            child: Text(
-              "Componente",
-              textAlign: TextAlign.left,
-              style: TextStyle(fontSize: 28),
-            ),
+          const Text(
+            "Componente",
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 30),
           ),
           Row(children: [
             Checkbox(
@@ -71,7 +67,7 @@ class _ComponenteState extends State<Componente> {
                   });
                 }),
             const Text("Item Repetido",
-                textAlign: TextAlign.right, style: TextStyle(fontSize: 18))
+                textAlign: TextAlign.center, style: TextStyle(fontSize: 18))
           ])
         ],
       ),

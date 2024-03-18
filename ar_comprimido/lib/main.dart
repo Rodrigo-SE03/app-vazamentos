@@ -5,9 +5,7 @@ import 'package:ar_comprimido/configs.dart';
 import 'package:ar_comprimido/database/objectbox.g.dart';
 import 'package:ar_comprimido/edit.dart';
 import 'package:ar_comprimido/help.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import './database/objectbox_databse.dart';
 import './dados.dart';
 
@@ -97,21 +95,12 @@ class MyHomePage extends StatelessWidget {
                     children: <Widget>[
                       Image.asset('assets/images/senai_logo.png',
                           fit: BoxFit.contain, height: 50),
-                      Expanded(
-                        flex:2,
-                        child: Icones(const Icon(Icons.info_outline,
-                            color: Colors.white, size: 40)),
-                      ),
-                      Expanded(
-                        flex:2,
-                        child: Icones(const Icon(Icons.settings,
-                            color: Colors.white, size: 40)),
-                      ),
-                      Expanded(
-                        flex:2,
-                        child: Icones(const Icon(Icons.add_circle_outline_rounded,
-                            color: Colors.white, size: 40)),
-                      )
+                      Icones(const Icon(Icons.info_outline,
+                          color: Colors.white, size: 40)),
+                      Icones(const Icon(Icons.settings,
+                          color: Colors.white, size: 40)),
+                      Icones(const Icon(Icons.add_circle_outline_rounded,
+                          color: Colors.white, size: 40))
                     ]))),
         body: const Column(children: [
           Padding(padding: EdgeInsets.all(10), child: ListaRegistros())
@@ -155,37 +144,31 @@ class _ListaRegistrosState extends State<ListaRegistros> {
               //                 File(atualizarRegistros()[index].fotoPath))))),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Expanded(
-                  flex:2,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 2),
-                        child: SizedBox(
-                          width:200,
-                          child: Text(
-                            "${atualizarRegistros()[index].local} - ${atualizarRegistros()[index].tag}",
-                            textAlign: TextAlign.left,
-                            style: titleFont(),
-                          ),
-                        ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 2),
+                      child: Text(
+                        "${atualizarRegistros()[index].local} - ${atualizarRegistros()[index].tag}",
+                        textAlign: TextAlign.left,
+                        style: titleFont(),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 2),
-                        child: Text(atualizarRegistros()[index].componente.toString(),
-                            textAlign: TextAlign.left,
-                            style: titleFont(cor: Colors.black)),
-                      )
-                    ],
-                  ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 2),
+                      child: Text(atualizarRegistros()[index].componente.toString(),
+                          textAlign: TextAlign.left,
+                          style: titleFont(cor: Colors.black)),
+                    )
+                  ],
                 ),
               ),
               const Spacer(
                 flex: 1,
               ),
-              Expanded(
-                flex:2,
+              Padding(
+                padding: const EdgeInsets.only(left: 100),
                 child: IconButton(
                     icon: const Icon(Icons.arrow_forward_ios_outlined,
                         color: cor_senai, size: 40),

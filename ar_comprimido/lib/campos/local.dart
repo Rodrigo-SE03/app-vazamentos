@@ -1,9 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ar_comprimido/main.dart';
 import 'package:ar_comprimido/dados.dart';
 import 'package:ar_comprimido/database/objectbox.g.dart';
-import 'package:flutter/widgets.dart';
 
 class Local extends StatefulWidget {
   const Local({
@@ -27,55 +25,49 @@ class _LocalState extends State<Local> {
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Expanded(
-            flex: 2,
-            child:  Text(
-              "Local",
-              textAlign: TextAlign.left,
-              style: TextStyle(fontSize: 28),
-            ),
+          const Text(
+            "Local",
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 30),
           ),
-          Expanded(
-            flex: 2,
-            child: Row(children: [
-              Checkbox(
-                  value: dadosBox.getAll().isEmpty ? false : isChecked,
-                  onChanged: (bool? value) {
-                    setState(() {
-                      if (dadosBox.getAll().isEmpty) {
-                        isChecked = false;
-                      } else {
-                        isChecked = value!;
-                      }
-                      if (isChecked) {
-                        Query<Dados> query =
-                            dadosBox.query(Dados_.tag.greaterOrEqual(0)).build();
-                        List<Dados> dadosList = query.find();
-                        List<String> locais = [];
-                        int i = 0;
-                        while (i < dadosList.length) {
-                          if (!locais.contains(dadosList[i].local)) {
-                            locais.add(dadosList[i].local);
-                          }
-                          i++;
+          Row(children: [
+            Checkbox(
+                value: dadosBox.getAll().isEmpty ? false : isChecked,
+                onChanged: (bool? value) {
+                  setState(() {
+                    if (dadosBox.getAll().isEmpty) {
+                      isChecked = false;
+                    } else {
+                      isChecked = value!;
+                    }
+                    if (isChecked) {
+                      Query<Dados> query =
+                          dadosBox.query(Dados_.tag.greaterOrEqual(0)).build();
+                      List<Dados> dadosList = query.find();
+                      List<String> locais = [];
+                      int i = 0;
+                      while (i < dadosList.length) {
+                        if (!locais.contains(dadosList[i].local)) {
+                          locais.add(dadosList[i].local);
                         }
-                        i = 0;
-                        while (i < locais.length) {
-                          DropdownMenuEntry item = DropdownMenuEntry(
-                              value: locais[i], label: locais[i]);
-                          listaRepetidos.add(item);
-                          i++;
-                        }
-                        query.close();
-                      } else {
-                        listaRepetidos.clear();
+                        i++;
                       }
-                    });
-                  }),
-              const Text("Item Repetido",
-                  textAlign: TextAlign.right, style: TextStyle(fontSize: 18))
-            ]),
-          )
+                      i = 0;
+                      while (i < locais.length) {
+                        DropdownMenuEntry item = DropdownMenuEntry(
+                            value: locais[i], label: locais[i]);
+                        listaRepetidos.add(item);
+                        i++;
+                      }
+                      query.close();
+                    } else {
+                      listaRepetidos.clear();
+                    }
+                  });
+                }),
+            const Text("Item Repetido",
+                textAlign: TextAlign.center, style: TextStyle(fontSize: 18))
+          ])
         ],
       ),
       Padding(
