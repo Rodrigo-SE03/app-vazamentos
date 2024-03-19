@@ -39,6 +39,8 @@ class Referencias extends StatelessWidget {
                             'Conexão pneumática de engate rápido'),
                         Itens('rosca', 'Conexão pneumática de rosca'),
                         Itens('valvula_solenoide', 'Válvula solenoide'),
+                        Itens('regulador_de_pressao','Regulador de Pressão'),
+                        Itens('valvula_esfera','Válvula Esfera')
                       ]))
                 ]))));
   }

@@ -62,18 +62,14 @@ class HelpScreen extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top:100, left: 30, right: 30),
-                    child: Row(children: [Icon(Icons.warning_amber_rounded,
-                            color: Color.fromARGB(255, 253, 0, 0), size: 40),
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width - 180,
-                              child: Padding(
-                                padding: const EdgeInsets.only(left:8.0),
-                                child: Text('Evite fazer mais de 100 registros!',
-                                style: bodyFont(),
-                                textAlign: TextAlign.justify,
-                                ),
-                              ))],),
+                    padding: const EdgeInsets.only(top: 100,bottom: 20),
+                    child: Icon(Icons.warning_amber_rounded,
+                              color: Color.fromARGB(255, 253, 0, 0), size: 40),
+                  ),
+                  Text('Evite fazer mais de 100 registros de uma só vez! Envie os já registrados, confirme se o envio foi bem sucedido, exclua os dados e continue a catalogar.',
+                  style: bodyFont(),
+                  textAlign: TextAlign.justify,
+                  softWrap: true,
                   )
                 ]))));
   }
