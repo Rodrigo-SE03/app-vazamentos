@@ -61,16 +61,6 @@ class HelpScreen extends StatelessWidget {
                           color: Colors.white),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 100,bottom: 20),
-                    child: Icon(Icons.warning_amber_rounded,
-                              color: Color.fromARGB(255, 253, 0, 0), size: 40),
-                  ),
-                  Text('Evite fazer mais de 100 registros de uma só vez! Envie os já registrados, confirme se o envio foi bem sucedido, exclua os dados e continue a catalogar.',
-                  style: bodyFont(),
-                  textAlign: TextAlign.justify,
-                  softWrap: true,
-                  )
                 ]))));
   }
 }

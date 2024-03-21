@@ -63,6 +63,21 @@ class InfoScreen extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(left: 10, right: 10, top: 20),
             child: Text(
+              'Limite de envio',
+              style: titleFont(size: 25, cor: Color.fromARGB(255, 1, 30, 124)),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 10),
+            child: Text(
+              'Existe um limite de registros que pode ser enviado por e-mail, devido ao tamanho do arquivo .zip criado. Caso o arquivo ultrapasse o limite aceito pelo e-mail, é possível acessá-lo pela memória do celular. O arquivo fica salvo na pasta "Documents" e possui o nome "dados_{dia do envio}-{mês do envio}.zip". O maior número de registros testado até o momento foi de 100 registros, e não superou o tamanho limite do e-mail.',
+              style: bodyFont(),
+              textAlign: TextAlign.justify,
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(left: 10, right: 10, top: 20),
+            child: Text(
               'Exclusão de dados',
               style: titleFont(size: 25, cor: Color.fromARGB(255, 1, 30, 124)),
             ),
