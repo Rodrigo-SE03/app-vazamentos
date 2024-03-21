@@ -9,7 +9,7 @@ import './dados.dart';
 import './excel.dart';
 import 'package:archive/archive_io.dart';
 import 'dart:io';
-import 'package:path_provider/path_provider.dart';
+import 'package:external_path/external_path.dart'; 
 
 class EmailSender {
   List<String> attachments = [];
@@ -27,8 +27,10 @@ class EmailSender {
 
   Future<void> delete() async {
     try {
+      Directory dir = Directory( await ExternalPath.getExternalStoragePublicDirectory(
+      ExternalPath.DIRECTORY_DOCUMENTS));
       await File(
-              '/data/user/0/com.example.ar_comprimido/app_flutter/dados_${DateTime.now().day}-${DateTime.now().month}.zip')
+              '${dir.path}/dados_${DateTime.now().day}-${DateTime.now().month}.zip')
           .delete();
     } on PathNotFoundException {
       print('Sem arquivo');
@@ -36,7 +38,9 @@ class EmailSender {
   }
 
   Future<void> zipper() async {
-    Directory dir = await getApplicationDocumentsDirectory();
+    Directory dir = Directory( await ExternalPath.getExternalStoragePublicDirectory(
+      ExternalPath.DIRECTORY_DOCUMENTS));
+    print(dir);
     Query<Dados> query = dadosBox.query(Dados_.tag.greaterOrEqual(0)).build();
     List<Dados> itens = query.find();
     var encoder = ZipFileEncoder();
@@ -56,13 +60,15 @@ class EmailSender {
   }
 
   Future<bool> send() async {
+    Directory dir = Directory( await ExternalPath.getExternalStoragePublicDirectory(
+      ExternalPath.DIRECTORY_DOCUMENTS));
     final Email email = Email(
       body: '',
       subject:
           'Registros de Vazamentos - ${DateTime.now().day}/${DateTime.now().month}',
       recipients: [''],
       attachmentPaths: [
-        '/data/user/0/com.example.ar_comprimido/app_flutter/dados_${DateTime.now().day}-${DateTime.now().month}.zip',
+        '${dir.path}/dados_${DateTime.now().day}-${DateTime.now().month}.zip',
       ],
       isHTML: false,
     );

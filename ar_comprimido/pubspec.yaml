@@ -44,6 +44,7 @@ dependencies:
   archive: ^3.4.10
   photo_manager: ^3.0.0-dev.5
   syncfusion_flutter_xlsio: ^24.2.7
+  external_path: ^1.0.3
 
 dev_dependencies:
   flutter_test:

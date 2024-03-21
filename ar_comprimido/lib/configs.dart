@@ -186,9 +186,11 @@ class Enviar extends StatelessWidget {
         TextButton(
           child: const Text('Sim', style: TextStyle(fontSize: 18)),
           onPressed: () async {
+            print("aqui");
             EmailSender email = EmailSender();
             await email.delete();
             await email.zipper();
+            print('here');
             await email.send();
             // ignore: use_build_context_synchronously
             Navigator.of(context).pushReplacement(
