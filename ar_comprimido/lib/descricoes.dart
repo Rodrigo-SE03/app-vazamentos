@@ -8,7 +8,9 @@ String descricao(String componente) {
     "regulador_de_pressao":
         "Componente responsável por regular a pressão do ar comprimido. Comumente possui um manômetro acoplado.",
     "valvula_esfera":
-        "Válvula usada para controlar o fluxo do ar comprimido."
+        "Válvula usada para controlar o fluxo do ar comprimido.",
+    "atuador":
+        "O atuador pneumático, também chamado de cilindro pneumático, é o componente que executa um movimento por meio do uso de ar comprimido."
   };
 
   return descricoes[componente]!;

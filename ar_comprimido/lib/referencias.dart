@@ -40,7 +40,8 @@ class Referencias extends StatelessWidget {
                         Itens('rosca', 'Conexão pneumática de rosca'),
                         Itens('valvula_solenoide', 'Válvula solenoide'),
                         Itens('regulador_de_pressao','Regulador de Pressão'),
-                        Itens('valvula_esfera','Válvula Esfera')
+                        Itens('valvula_esfera','Válvula Esfera'),
+                        Itens('atuador','Atuador Pneumático')
                       ]))
                 ]))));
   }
