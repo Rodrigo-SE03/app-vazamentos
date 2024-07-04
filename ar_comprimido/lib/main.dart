@@ -50,11 +50,11 @@ class MyApp extends StatelessWidget {
 class Icones extends StatelessWidget {
   Icon icon;
   final Icon add = const Icon(Icons.add_circle_outline_rounded,
-      color: Colors.white, size: 40);
+      color: Colors.white, size: 30);
   final Icon settings =
-      const Icon(Icons.settings, color: Colors.white, size: 40);
+      const Icon(Icons.settings, color: Colors.white, size: 30);
   final Icon info =
-      const Icon(Icons.info_outline, color: Colors.white, size: 40);
+      const Icon(Icons.info_outline, color: Colors.white, size: 30);
   Box<Dados>? dadosBox;
   Icones(this.icon, {super.key, this.dadosBox});
 
@@ -94,7 +94,7 @@ class MyHomePage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       Image.asset('assets/images/senai_logo.png',
-                          fit: BoxFit.contain, height: 50),
+                          fit: BoxFit.contain, height: 42),
                       Icones(const Icon(Icons.info_outline,
                           color: Colors.white, size: 40)),
                       Icones(const Icon(Icons.settings,

@@ -23,7 +23,7 @@ class _ClassificacaoState extends State<Classificacao> {
               Text(
                 "Classificação",
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 30),
+                style: TextStyle(fontSize: 25),
               )
             ],
           )),

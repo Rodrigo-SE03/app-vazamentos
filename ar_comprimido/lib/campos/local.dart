@@ -28,7 +28,7 @@ class _LocalState extends State<Local> {
           const Text(
             "Local",
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 30),
+            style: TextStyle(fontSize: 25),
           ),
           Row(children: [
             Checkbox(
@@ -66,7 +66,7 @@ class _LocalState extends State<Local> {
                   });
                 }),
             const Text("Item Repetido",
-                textAlign: TextAlign.center, style: TextStyle(fontSize: 18))
+                textAlign: TextAlign.center, style: TextStyle(fontSize: 14))
           ])
         ],
       ),

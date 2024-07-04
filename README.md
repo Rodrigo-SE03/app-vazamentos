@@ -5,7 +5,7 @@ linhas de ar comprimido.
 
 O aplicativo é funcional em casos de ausência de internet, sendo necessária apenas no momento do envio dos dados.
 
-Os dados exportados são tratados em outros programas.
+Os dados exportados são tratados em outro programa.
 
 
 Autor: Rodrigo Santana Esperidião

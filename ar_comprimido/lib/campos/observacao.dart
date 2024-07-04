@@ -41,7 +41,7 @@ class _ObservacaoState extends State<Observacao> {
           const Text(
             "Observação",
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 30),
+            style: TextStyle(fontSize: 25),
           ),
           Row(children: [
             Checkbox(
@@ -80,7 +80,7 @@ class _ObservacaoState extends State<Observacao> {
                   });
                 }),
             const Text("Item Repetido",
-                textAlign: TextAlign.center, style: TextStyle(fontSize: 18))
+                textAlign: TextAlign.center, style: TextStyle(fontSize: 14))
           ])
         ],
       ),

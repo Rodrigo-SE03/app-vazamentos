@@ -46,21 +46,21 @@ class HelpScreen extends StatelessWidget {
                               color: Colors.white),
                         ),
                       )),
-                  FloatingActionButton.extended(
-                    heroTag: 'refs',
-                    onPressed: () {
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: (context) => const Referencias()));
-                    },
-                    backgroundColor: cor_senai,
-                    label: const Text(
-                      'Fotos de referência',
-                      style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white),
-                    ),
-                  ),
+                  // FloatingActionButton.extended(
+                  //   heroTag: 'refs',
+                  //   onPressed: () {
+                  //     Navigator.of(context).pushReplacement(MaterialPageRoute(
+                  //         builder: (context) => const Referencias()));
+                  //   },
+                  //   backgroundColor: cor_senai,
+                  //   label: const Text(
+                  //     'Fotos de referência',
+                  //     style: TextStyle(
+                  //         fontSize: 20,
+                  //         fontWeight: FontWeight.bold,
+                  //         color: Colors.white),
+                  //   ),
+                  // ),
                 ]))));
   }
 }
