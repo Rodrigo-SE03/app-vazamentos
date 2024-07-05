@@ -90,21 +90,6 @@ class InfoScreen extends StatelessWidget {
               textAlign: TextAlign.justify,
             ), //Seria bom colocar uma imagem disso nessa parte
           ),
-          Padding(
-            padding: EdgeInsets.only(left: 10, right: 10, top: 20),
-            child: Text(
-              'Exclusão de um único registro',
-              style: titleFont(size: 25, cor: Color.fromARGB(255, 1, 30, 124)),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10),
-            child: Text(
-              'É possível excluir um único elemento da lista de registros caso necessário. Para isso, basta ir na tela principal e pressionar a seta à direita do item que se deseja excluir. Isso o direcionará a uma tela contendo as informações do registro. Nessa tela, haverá um ícone de lixeira na parte superior, o qual apagará o registro.',
-              style: bodyFont(),
-              textAlign: TextAlign.justify,
-            ),
-          ),
         ])));
   }
 }

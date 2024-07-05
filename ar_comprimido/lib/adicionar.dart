@@ -78,9 +78,9 @@ class _AddScreenState extends State<AddScreen> {
           tag = 1;
         } else {
           Query<Dados> query =
-              dadosBox.query(Dados_.tag.greaterOrEqual(0)).build();
+              dadosBox.query(Dados_.tag.greaterOrEqual(0)).order(Dados_.tag,flags: Order.descending).build();
           List<Dados> listaItens = query.find();
-          tag = listaItens[listaItens.length - 1].tag + 1;
+          tag = listaItens[0].tag + 1;
         }
       }
     }

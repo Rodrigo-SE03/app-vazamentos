@@ -43,9 +43,10 @@ class EmailSender {
     print(dir);
     Query<Dados> query = dadosBox.query(Dados_.tag.greaterOrEqual(0)).build();
     List<Dados> itens = query.find();
+    print(itens[0].local);
     var encoder = ZipFileEncoder();
     encoder.create(
-        '${dir.path}/dados_${DateTime.now().day}-${DateTime.now().month}.zip');
+        '${dir.path}/dados_${DateTime.now().day}-${DateTime.now().month}.zip');  // O PROBLEMA É AQUI
     int i = 0;
     while (i < itens.length) {
       encoder.addFile(File(itens[i].fotoPath));
